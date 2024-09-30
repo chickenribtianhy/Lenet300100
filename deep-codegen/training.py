@@ -13,7 +13,7 @@ from torchvision import datasets, transforms
 from torch.autograd import Variable
 
 from utils import *
-from mylenet import *
+from myLenet import *
 
 
 def save_state(model, acc):
@@ -26,7 +26,6 @@ def save_state(model, acc):
         if 'module' in key:
             state['state_dict'][key.replace('module.', '')] = \
                     state['state_dict'].pop(key)
-    # print("_________", os.getcwd())
     torch.save(state, 'saved_models/'+args.arch+'.best_origin.pth.tar')
 
 def train(epoch):

@@ -1,11 +1,13 @@
+import os
+import sys
+
 import torch 
 import torch.nn as nn
 import torch.nn.functional as F
 import math
 
 from pytorch_apis import MatrixMuliplication
-import os
-import sys
+
 cwd = os.getcwd()
 sys.path.append(cwd+'../')
 
