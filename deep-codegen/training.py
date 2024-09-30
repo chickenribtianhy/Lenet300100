@@ -14,6 +14,7 @@ from torch.autograd import Variable
 
 from utils import *
 from myLenet import *
+# from myLenet_scratch import *
 
 
 def save_state(model, acc):

@@ -12,7 +12,7 @@ kernel.cu: matrix multiplication kernel (tiling, memory coalescing, avoiding ban
 
 pytorch_apis.py: forward and backward of matrix multiplication
 
-myLinear.py: Linear (using kaiming init)
+<!-- myLinear.py: Linear (using kaiming init) -->
 
 myLenet.py: Lenet300100 from scratch
 

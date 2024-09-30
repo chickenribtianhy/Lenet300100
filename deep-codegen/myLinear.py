@@ -15,6 +15,8 @@ sys.path.append(cwd+'../')
 class Linear(nn.Module):
     def __init__(self, in_features, out_features):
         super(Linear, self).__init__()
+        self._infeature = in_features
+        self._outfeature = out_features
         self._weight = nn.Parameter(torch.empty(in_features, out_features))
         self._bias = nn.Parameter(torch.empty(out_features))
         self.reset_parameters()
@@ -31,7 +33,7 @@ class Linear(nn.Module):
         return
     
     def forward(self, x):
-        return torch.matmul(x, self._weight) + self._bias
+        return MatrixMuliplication(x, self._weight, x.size(0), self._outfeature, self.device) + self._bias
     
 
         
