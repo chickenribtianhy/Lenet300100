@@ -30,12 +30,18 @@ class MatrixMuliplication_impl(th.autograd.Function):
     @staticmethod
     def backward(ctx, dZ):
         X, W, dim_0, dim_1, device0 = ctx.backward_cache
-        dX = th.mm(dZ, W.t())
-        # dX = dZ @ W.t()
-        dW = th.mm(X.t(), dZ)
-        # dX = gp_apis.gp_MatrixMuliplication(dZ, W.t(), dZ.shape[0], W.shape[0], device0)
-        # dW = gp_apis.gp_MatrixMuliplication(X.t(), dZ, X.shape[1], dZ.shape[1], device0)
-
+        # dX = th.mm(dZ, W.t())
+        # dW = th.mm(X.t(), dZ)
+        # print('MatrixMuliplication backward')
+        # print("dZ shape: ", dZ.shape)
+        # print("X shape: ", X.shape)
+        # print("W shape: ", W.shape)
+        # print("W.T", W.T.contiguous().shape)
+        dX = gp_apis.gp_MatrixMuliplication(dZ, W.T.contiguous(), dZ.shape[0], W.shape[0], device0)
+        # print("dX shape: ", dX.shape)
+        dW = gp_apis.gp_MatrixMuliplication(X.T.contiguous(), dZ, X.shape[1], dZ.shape[1], device0)
+        # print("dW shape: ", dW.shape)
+        # print(dX.shape)
         return dX, dW, None, None, None
 
 def MatrixMuliplication(input1, input2, dim_0, dim_1, device0):

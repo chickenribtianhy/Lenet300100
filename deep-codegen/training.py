@@ -14,8 +14,11 @@ from torch.autograd import Variable
 
 from utils import *
 from myLenet import *
+# from pytorchLenet import *
 # from myLenet_scratch import *
 
+
+from torch.profiler import profile, ProfilerActivity
 
 def save_state(model, acc):
     print('==> Saving model ...')
@@ -93,7 +96,7 @@ if __name__=='__main__':
             help='input batch size for training (default: 128)')
     parser.add_argument('--test-batch-size', type=int, default=128, metavar='N',
             help='input batch size for testing (default: 128)')
-    parser.add_argument('--epochs', type=int, default=10, metavar='N',
+    parser.add_argument('--epochs', type=int, default=2, metavar='N',
             help='number of epochs to train (default: 60)')
     parser.add_argument('--lr-epochs', type=int, default=15, metavar='N',
             help='number of epochs to decay the lr (default: 15)')
@@ -192,3 +195,12 @@ if __name__=='__main__':
         adjust_learning_rate(optimizer, epoch)
         train(epoch)
         test()
+
+    # with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
+    #     for epoch in range(1, args.epochs + 1):
+    #         adjust_learning_rate(optimizer, epoch)
+    #         train(epoch)
+            # test()
+
+    # print(prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=20))
+    # print(prof.key_averages().table(sort_by="self_cuda_time_total", row_limit=20))

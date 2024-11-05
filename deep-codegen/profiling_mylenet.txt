@@ -1,0 +1,86 @@
+
+==> Setting params:
+batch_size : 128
+test_batch_size : 128
+epochs : 1
+lr_epochs : 15
+lr : 0.1
+momentum : 0.9
+weight_decay : 0.0001
+no_cuda : False
+seed : 1
+log_interval : 100
+arch : LeNet_300_100
+pretrained : None
+evaluate : False
+retrain : False
+cuda : True
+====================
+
+LeNet_300_100(
+  (linear1): Linear()
+  (relu_ip1): ReLU(inplace=True)
+  (linear2): Linear()
+  (relu_ip2): ReLU(inplace=True)
+  (linear3): Linear()
+)
+Learning rate: 0.1
+Train Epoch: 1 [0/60000 (0%)]	Loss: 2.578755
+Train Epoch: 1 [12800/60000 (21%)]	Loss: 0.264655
+Train Epoch: 1 [25600/60000 (43%)]	Loss: 0.129409
+Train Epoch: 1 [38400/60000 (64%)]	Loss: 0.150981
+Train Epoch: 1 [51200/60000 (85%)]	Loss: 0.067829
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+enumerate(DataLoader)#_MultiProcessingDataLoaderIter...        76.06%        9.446s        76.18%        9.461s      20.129ms       0.000us         0.00%     424.352us       0.903us           470  
+                                Optimizer.step#SGD.step         4.20%     521.165ms         9.11%        1.131s       2.411ms       0.000us         0.00%      63.906ms     136.260us           469  
+                                       cudaLaunchKernel         4.67%     580.276ms         4.67%     580.287ms      23.356us       0.000us         0.00%      15.936us       0.001us         24845  
+autograd::engine::evaluate_function: MatrixMuliplica...         0.33%      40.367ms         3.63%     450.482ms     320.172us       0.000us         0.00%      23.818ms      16.928us          1407  
+                       MatrixMuliplication_implBackward         0.71%      88.151ms         3.30%     410.115ms     291.482us       0.000us         0.00%      23.818ms      16.928us          1407  
+                               MatrixMuliplication_impl         1.08%     134.319ms         2.69%     333.828ms     237.262us      31.905ms         2.92%      34.359ms      24.420us          1407  
+                                               aten::mm         1.35%     167.902ms         2.15%     266.982ms      94.876us      23.818ms         2.18%      23.818ms       8.464us          2814  
+                                     aten::_foreach_add         0.87%     107.981ms         2.08%     258.573ms      91.888us      18.346ms         1.68%      18.346ms       6.520us          2814  
+                                    aten::_foreach_add_         1.09%     135.613ms         1.83%     226.992ms      40.376us      32.330ms         2.96%      32.330ms       5.751us          5622  
+      autograd::engine::evaluate_function: AddBackward0         0.37%      46.360ms         1.33%     165.289ms     117.476us       0.000us         0.00%      11.551ms       8.210us          1407  
+                                            aten::zeros         0.13%      16.702ms         1.22%     151.996ms     108.029us       0.000us         0.00%       2.454ms       1.744us          1407  
+                                            aten::zero_         0.18%      22.020ms         1.07%     132.991ms      70.891us       0.000us         0.00%       3.236ms       1.725us          1876  
+                                            aten::fill_         0.41%      50.848ms         1.04%     129.190ms      55.092us       4.015ms         0.37%       4.015ms       1.712us          2345  
+                                    aten::_foreach_mul_         0.56%      68.969ms         1.00%     123.897ms      44.123us      13.217ms         1.21%      13.217ms       4.707us          2808  
+                               aten::cross_entropy_loss        -0.10%  -12083.013us         0.94%     116.885ms     249.222us       0.000us         0.00%       3.014ms       6.425us           469  
+                                              aten::add         0.61%      76.177ms         0.92%     114.053ms      81.061us       4.379ms         0.40%       4.379ms       3.112us          1407  
+                                               aten::to         0.11%      13.103ms         0.90%     111.456ms      79.215us       0.000us         0.00%      14.427ms      10.254us          1407  
+                                    aten::empty_strided         0.86%     106.383ms         0.86%     106.489ms      25.193us       0.000us         0.00%       0.000us       0.000us          4227  
+     autograd::engine::evaluate_function: ReluBackward0         0.17%      21.100ms         0.83%     103.136ms     109.953us       0.000us         0.00%       1.976ms       2.106us           938  
+                                              aten::sum         0.54%      66.661ms         0.82%     102.334ms      72.732us      11.551ms         1.06%      11.551ms       8.210us          1407  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 12.419s
+Self CUDA time total: 1.092s
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                Optimizer.step#SGD.step         0.00%       0.000us         0.00%       0.000us       0.000us     928.558ms        85.03%     928.558ms       1.980ms           469  
+                                Optimizer.step#SGD.step         4.20%     521.165ms         9.11%        1.131s       2.411ms       0.000us         0.00%      63.906ms     136.260us           469  
+                               MatrixMuliplication_impl         1.08%     134.319ms         2.69%     333.828ms     237.262us      31.905ms         2.92%      34.359ms      24.420us          1407  
+                                    aten::_foreach_add_         1.09%     135.613ms         1.83%     226.992ms      40.376us      32.330ms         2.96%      32.330ms       5.751us          5622  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      32.330ms         2.96%      32.330ms       5.751us          5622  
+MatrixMulKernel(float*, float*, float*, int, int, in...         0.00%       0.000us         0.00%       0.000us       0.000us      31.905ms         2.92%      31.905ms      22.676us          1407  
+autograd::engine::evaluate_function: MatrixMuliplica...         0.33%      40.367ms         3.63%     450.482ms     320.172us       0.000us         0.00%      23.818ms      16.928us          1407  
+                       MatrixMuliplication_implBackward         0.71%      88.151ms         3.30%     410.115ms     291.482us       0.000us         0.00%      23.818ms      16.928us          1407  
+                                               aten::mm         1.35%     167.902ms         2.15%     266.982ms      94.876us      23.818ms         2.18%      23.818ms       8.464us          2814  
+                                     aten::_foreach_add         0.87%     107.981ms         2.08%     258.573ms      91.888us      18.346ms         1.68%      18.346ms       6.520us          2814  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      18.346ms         1.68%      18.346ms       6.520us          2814  
+                                            aten::copy_         0.14%      17.394ms         0.48%      59.933ms      63.489us      14.440ms         1.32%      14.440ms      15.296us           944  
+                                               aten::to         0.11%      13.103ms         0.90%     111.456ms      79.215us       0.000us         0.00%      14.427ms      10.254us          1407  
+                                         aten::_to_copy         0.13%      16.738ms         0.79%      98.353ms     104.854us       0.000us         0.00%      14.427ms      15.381us           938  
+                         Memcpy HtoD (Pinned -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us      14.427ms         1.32%      14.427ms      15.381us           938  
+                                    aten::_foreach_mul_         0.56%      68.969ms         1.00%     123.897ms      44.123us      13.217ms         1.21%      13.217ms       4.707us          2808  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      13.217ms         1.21%      13.217ms       4.707us          2808  
+      autograd::engine::evaluate_function: AddBackward0         0.37%      46.360ms         1.33%     165.289ms     117.476us       0.000us         0.00%      11.551ms       8.210us          1407  
+                                              aten::sum         0.54%      66.661ms         0.82%     102.334ms      72.732us      11.551ms         1.06%      11.551ms       8.210us          1407  
+                        ampere_sgemm_32x32_sliced1x4_nt         0.00%       0.000us         0.00%       0.000us       0.000us      11.164ms         1.02%      11.164ms       7.941us          1406  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 12.419s
+Self CUDA time total: 1.092s
+

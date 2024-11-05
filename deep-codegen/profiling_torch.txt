@@ -1,0 +1,86 @@
+
+==> Setting params:
+batch_size : 128
+test_batch_size : 128
+epochs : 1
+lr_epochs : 15
+lr : 0.1
+momentum : 0.9
+weight_decay : 0.0001
+no_cuda : False
+seed : 1
+log_interval : 100
+arch : LeNet_300_100
+pretrained : None
+evaluate : False
+retrain : False
+cuda : True
+====================
+
+LeNet_300_100(
+  (linear1): Linear(in_features=784, out_features=300, bias=True)
+  (relu_ip1): ReLU(inplace=True)
+  (linear2): Linear(in_features=300, out_features=100, bias=True)
+  (relu_ip2): ReLU(inplace=True)
+  (linear3): Linear(in_features=100, out_features=10, bias=True)
+)
+Learning rate: 0.1
+Train Epoch: 1 [0/60000 (0%)]	Loss: 2.323058
+Train Epoch: 1 [12800/60000 (21%)]	Loss: 0.214168
+Train Epoch: 1 [25600/60000 (43%)]	Loss: 0.128226
+Train Epoch: 1 [38400/60000 (64%)]	Loss: 0.105635
+Train Epoch: 1 [51200/60000 (85%)]	Loss: 0.096584
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+enumerate(DataLoader)#_MultiProcessingDataLoaderIter...        77.48%        8.963s        77.55%        8.971s      19.087ms       0.000us         0.00%     493.954us       1.051us           470  
+                                Optimizer.step#SGD.step         4.64%     537.284ms         9.86%        1.140s       2.431ms       0.000us         0.00%      63.727ms     135.879us           469  
+                                       cudaLaunchKernel         4.18%     483.628ms         4.18%     483.638ms      21.953us       0.000us         0.00%       0.000us       0.000us         22031  
+                                            aten::addmm         1.22%     140.859ms         1.87%     216.025ms     153.536us      14.697ms         1.37%      14.697ms      10.445us          1407  
+                                    aten::_foreach_add_         1.14%     131.372ms         1.91%     220.381ms      39.200us      32.320ms         3.01%      32.320ms       5.749us          5622  
+                                    aten::empty_strided         0.94%     108.547ms         0.94%     108.670ms      25.709us       0.000us         0.00%       7.456us       0.002us          4227  
+                                     aten::_foreach_add         0.93%     107.420ms         2.27%     262.632ms      93.331us      18.196ms         1.70%      18.196ms       6.466us          2814  
+                                               aten::mm         0.92%     106.968ms         1.30%     150.249ms      64.072us      17.418ms         1.62%      17.418ms       7.428us          2345  
+                                    aten::_foreach_mul_         0.57%      65.768ms         1.03%     119.713ms      42.633us      13.199ms         1.23%      13.199ms       4.700us          2808  
+                                              aten::sum         0.53%      61.289ms         0.80%      93.058ms      66.139us      10.700ms         1.00%      10.700ms       7.605us          1407  
+                      Optimizer.zero_grad#SGD.zero_grad         0.53%      60.914ms         0.53%      60.914ms     129.881us       0.000us         0.00%       0.000us       0.000us           469  
+    autograd::engine::evaluate_function: AddmmBackward0         0.48%      55.930ms         3.44%     397.713ms     282.667us       0.000us         0.00%      28.118ms      19.984us          1407  
+                                                aten::t         0.45%      52.060ms         1.03%     118.885ms      18.106us       0.000us         0.00%       0.000us       0.000us          6566  
+                                        aten::transpose         0.42%      48.225ms         0.58%      66.825ms      10.177us       0.000us         0.00%       0.000us       0.000us          6566  
+                               aten::threshold_backward         0.39%      45.492ms         0.63%      72.978ms      77.801us       2.023ms         0.19%       2.023ms       2.156us           938  
+autograd::engine::evaluate_function: torch::autograd...         0.34%      39.622ms         0.72%      83.797ms      29.779us       0.000us         0.00%       0.000us       0.000us          2814  
+                                         AddmmBackward0         0.28%      32.875ms         2.07%     239.997ms     170.573us       0.000us         0.00%      17.418ms      12.380us          1407  
+                                        cudaMemcpyAsync         0.23%      26.914ms         0.23%      26.914ms      28.361us       0.000us         0.00%       0.000us       0.000us           949  
+                                 aten::nll_loss_forward         0.23%      26.827ms         0.37%      42.960ms      91.599us       1.789ms         0.17%       1.789ms       3.815us           469  
+                                     aten::_log_softmax         0.22%      25.761ms         0.47%      54.935ms     117.132us       1.035ms         0.10%       1.035ms       2.207us           469  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 11.568s
+Self CUDA time total: 1.073s
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                Optimizer.step#SGD.step         0.00%       0.000us         0.00%       0.000us       0.000us     935.744ms        87.22%     935.744ms       1.995ms           469  
+                                    aten::_foreach_add_         1.14%     131.372ms         1.91%     220.381ms      39.200us      32.320ms         3.01%      32.320ms       5.749us          5622  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      32.320ms         3.01%      32.320ms       5.749us          5622  
+                                            aten::copy_         0.18%      21.198ms         0.63%      72.708ms      77.021us      19.676ms         1.83%      19.676ms      20.843us           944  
+                         Memcpy HtoD (Pinned -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us      19.663ms         1.83%      19.663ms      20.963us           938  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      18.211ms         1.70%      18.211ms       6.471us          2814  
+                                     aten::_foreach_add         0.93%     107.420ms         2.27%     262.632ms      93.331us      18.196ms         1.70%      18.196ms       6.466us          2814  
+                                               aten::mm         0.92%     106.968ms         1.30%     150.249ms      64.072us      17.418ms         1.62%      17.418ms       7.428us          2345  
+                                            aten::addmm         1.22%     140.859ms         1.87%     216.025ms     153.536us      14.697ms         1.37%      14.697ms      10.445us          1407  
+                                    aten::_foreach_mul_         0.57%      65.768ms         1.03%     119.713ms      42.633us      13.199ms         1.23%      13.199ms       4.700us          2808  
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us      13.199ms         1.23%      13.199ms       4.700us          2808  
+                        ampere_sgemm_32x32_sliced1x4_tn         0.00%       0.000us         0.00%       0.000us       0.000us      11.644ms         1.09%      11.644ms       8.276us          1407  
+                                              aten::sum         0.53%      61.289ms         0.80%      93.058ms      66.139us      10.700ms         1.00%      10.700ms       7.605us          1407  
+                        ampere_sgemm_32x32_sliced1x4_nt         0.00%       0.000us         0.00%       0.000us       0.000us       6.635ms         0.62%       6.635ms       7.073us           938  
+void at::native::reduce_kernel<128, 4, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       6.032ms         0.56%       6.032ms       6.431us           938  
+void cutlass::Kernel<cutlass_80_simt_sgemm_128x32_8x...         0.00%       0.000us         0.00%       0.000us       0.000us       5.084ms         0.47%       5.084ms      10.840us           469  
+void at::native::reduce_kernel<256, 2, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       4.667ms         0.44%       4.667ms       9.952us           469  
+                        ampere_sgemm_32x32_sliced1x4_nn         0.00%       0.000us         0.00%       0.000us       0.000us       3.397ms         0.32%       3.397ms       7.244us           469  
+void splitKreduce_kernel<32, 16, int, float, float, ...         0.00%       0.000us         0.00%       0.000us       0.000us       3.053ms         0.28%       3.053ms       3.254us           938  
+                                 ampere_sgemm_128x32_nn         0.00%       0.000us         0.00%       0.000us       0.000us       2.302ms         0.21%       2.302ms       4.908us           469  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 11.568s
+Self CUDA time total: 1.073s
+
