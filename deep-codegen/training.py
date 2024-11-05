@@ -24,7 +24,7 @@ def save_state(model, acc):
     print('==> Saving model ...')
     state = {
             'acc': acc,
-            'state_dict': model.state_dict(),
+            'state_dict': model.module.state_dict() if isinstance(model, nn.DataParallel) else model.state_dict(),
             }
     for key in state['state_dict'].keys():
         if 'module' in key:
@@ -96,7 +96,7 @@ if __name__=='__main__':
             help='input batch size for training (default: 128)')
     parser.add_argument('--test-batch-size', type=int, default=128, metavar='N',
             help='input batch size for testing (default: 128)')
-    parser.add_argument('--epochs', type=int, default=2, metavar='N',
+    parser.add_argument('--epochs', type=int, default=50, metavar='N',
             help='number of epochs to train (default: 60)')
     parser.add_argument('--lr-epochs', type=int, default=15, metavar='N',
             help='number of epochs to decay the lr (default: 15)')
@@ -153,6 +153,9 @@ if __name__=='__main__':
         print('ERROR: specified arch is not suppported')
         exit()
 
+    if args.cuda:
+        model = nn.DataParallel(model).cuda()  # Wrap model in DataParallel for multi-GPU training
+    
     if not args.pretrained:
         best_acc = 0.0
     else:
@@ -160,9 +163,6 @@ if __name__=='__main__':
         best_acc = pretrained_model['acc']
         load_state(model, pretrained_model['state_dict'])
 
-    if args.cuda:
-        model.cuda()
-    
     print(model)
     param_dict = dict(model.named_parameters())
     params = []
@@ -202,5 +202,5 @@ if __name__=='__main__':
     #         train(epoch)
             # test()
 
-    # print(prof.key_averages().table(sort_by="self_cpu_time_total", row_limit=20))
-    # print(prof.key_averages().table(sort_by="self_cuda_time_total", row_limit=20))
+    # print(prof.key_averages().table(sort_by=\"self_cpu_time_total\", row_limit=20))
+    # print(prof.key_averages().table(sort_by=\"self_cuda_time_total\", row_limit=20))
